@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
+      <a class="navbar-brand" href="{% url 'recommend:home' %}">RECOMMEND</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    {% if messages %}
+    <div class="container">
+      <ul class="messages_ul">
+        {% for message in messages %}
+          <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    <footer th:fragment="footer">
+      <div class="container mb-5">
+        <meta charset="utf-8"/>
+        <div class="container text-center">
+          <!-- ナビゲーション -->
+          <ul class="nav justify-content-center mb-3">
+            <li class="nav-item">
+              <a class="nav-link" href="#">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Information</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="l">Contact</a>
+            </li>
+          </ul>
+          <!-- /ナビゲーション -->
+        <div style="text-align:center">©2020年 | Studio_Xedge | パーソナライズ研究班</div>
+      </div>
+    </footer>
+  </body>
+</html>

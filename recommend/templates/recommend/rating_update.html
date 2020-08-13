@@ -1,0 +1,28 @@
+{% extends "recommend/base.html" %}
+
+{% block title %}rating_update{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <div class="container">
+    <head>
+      <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+      {% load static %}
+      <title>anime</title>
+    </head>
+    <body>
+      <form method="POST">
+        {% csrf_token %}
+        <label for="id_evaluation">Evaluation：</label>
+        <output id="output1">5</output>
+        <input type="range" class="input-range mb-4" name="evaluation" required="" id="id_evaluation" value="5" min="0" max="10" step="1" oninput="document.getElementById('output1').value=this.value">
+        </label>
+        <input class="btn btn-outline-info btn-block text-nowrap" type="submit" value="更新" onclick='return confirm("更新しますか？");'>
+      </form>
+    </body>
+  </div>
+</html>
+
+{% endblock %}

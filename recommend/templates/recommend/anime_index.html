@@ -1,0 +1,41 @@
+{% extends "recommend/base.html" %}
+
+{% block title %}Index{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <div class="container">
+    <head>
+      <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+      {% load static %}
+      <title>anime</title>
+    </head>
+    <body>
+      <h4>アニメ一覧</h4>
+      </hr>
+      <ul class="list-unstyled" style="width:1800">
+        {% for item in object_list %}
+        <li class="media mb-3 p-2 border">
+          <img class="mr-5" src="{% static "image\movie.png" %}" height="64" width="64" alt="メディアの画像">
+          <div class="media-body">
+            <div class="row">
+              <div class="col-md-10">
+                <h5 class="mt-0"><a href="{% url 'recommend:anime_detail' item.anime_id %}">{{item.name}}</a></h5>
+                <p class="text-nowrap">ジャンル：{{item.genre}}　メディア：{{item.anime_type}}　話数：{{item.episodes}}</p>
+              </div>
+              <div class="col-md-2">
+                <a href="{% url 'recommend:rating_create' item.anime_id %}" class="btn btn-outline-info btn-sd   text-nowrap">評価</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% include "recommend/snippets/pagination.html" %}
+    </body>
+  </div>
+</html>
+
+{% endblock %}

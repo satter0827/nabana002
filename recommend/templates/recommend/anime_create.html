@@ -1,0 +1,27 @@
+{% extends "recommend/base.html" %}
+
+{% block title %}anime_create{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <div class="container">
+    <head>
+      <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+      {% load static %}
+      <title>anime</title>
+    </head>
+    <body>
+      <form action="{% url 'recommend:anime_create' %}" method="POST">
+        <table class="table">
+          {% csrf_token %}
+          {{ form.as_table}}
+        </table>
+        <input class="btn btn-outline-info btn-block text-nowrap" type="submit" value="登録" onclick='return confirm(" 登録しますか？");'>
+      </form>
+    </body>
+  </div>
+</html>
+
+{% endblock %}

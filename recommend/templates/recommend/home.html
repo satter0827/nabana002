@@ -1,0 +1,95 @@
+{% extends "recommend/base.html" %}
+
+{% block title %}Index{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <div class="container">
+    <head>
+      <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+      <title>home</title>
+    </head>
+    <body>
+      {% load static %}
+      <div class="jumbotron" style="background:url({% static "image\jumbotron.jpg" %}); center no-repeat; background-size: cover;">
+				<h1 class="display-4"><font color="orange">Xedge Recommender</font></h1>
+				<p class="lead"><font color="white">コンテンツを推薦するサイト</font></p>
+				<hr class="my-4">
+				<p class="lead" style="display: inline-block;"><font color="white">われわれはうちゅうじんだ</font></p><br>
+				<a class="btn btn-info btn-sd" href="" role="button">詳しくはこちら</a>
+      </div>
+			<!-- コンテンツ01 -->
+			<div class="py-4 mb-3 border">
+        <section id="news">
+          <div class="container">
+            <div class="row">
+              <!-- 左側カラム（画面幅md以上） -->
+              <div class="col-md-2">
+                <h3>News</h3>
+              </div>
+              <!-- 右側カラム（画面幅md以上） -->
+              <div class="col-md-10">
+                <dl class="row">
+                  <dt class="col-md-3">2020年8月1日</dt>
+                  <dd class="col-md-9">サイトを開設しました!</dd>
+                  <dt class="col-md-3">2020年8月1日</dt>
+                  <dd class="col-md-9">新規機能を追加しました!</dd>
+                  <dt class="col-md-3">2020年8月1日</dt>
+                  <dd class="col-md-9">新規機能を追加しました!</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="{{ result_one.photo }}" alt="Card image cap" height="30%" width="30%">
+            <div class="card-body">
+              <h5 class="card-title"><a href="{% url 'recommend:anime_detail' result_one.anime_id.anime_id %}" class="card-link">{{result_one.anime_id.name}}</a></h5>
+              <table class="table">
+                <tr>
+                  <th>{{ result_one.anime_id.genre }}</th>
+                </tr>
+                <tr>
+                  <th>{{ result_one.anime_id.anime_type }}</th>
+                </tr>
+                <tr>
+                  <th>{{ result_one.evaluation }}</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="card-columns">
+            {% for item in result_list %}
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title"><a href="{% url 'recommend:anime_detail' item.anime_id.anime_id %}" class="card-link">{{item.anime_id.name}}</a></h5>
+              </div>
+              <div class="card-body">
+                <table class="table">
+                  <tr>
+                    <th>{{ item.anime_id.genre }}</th>
+                  </tr>
+                  <tr>
+                    <th>{{ item.anime_id.anime_type }}</th>
+                  </tr>
+                  <tr>
+                    <th>{{ item.evaluation }}</th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </body>
+  </div>
+</html>
+{% endblock %}

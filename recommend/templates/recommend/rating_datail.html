@@ -1,0 +1,34 @@
+{% extends "recommend/base.html" %}
+
+{% block title %}rating_detail{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <div class="container">
+    <head>
+      <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+      {% load static %}
+      <title>rating</title>
+    </head>
+    <body>
+      <table class="table">
+        <tr>
+          <th>ユーザID</th>
+          <th>{{ rating.user_id }}</th>
+        </tr>
+        <tr>
+          <th>アニメID</th>
+          <th>{{ rating.anime_id.name }}</th>
+        </tr>
+        <tr>
+          <th>評価</th>
+          <th>{{ rating.evaluation }}</th>
+        </tr>
+      </table>
+    </body>
+  </div>
+</html>
+
+{% endblock %}

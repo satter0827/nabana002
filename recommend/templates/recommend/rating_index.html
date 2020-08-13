@@ -1,0 +1,49 @@
+{% extends "recommend/base.html" %}
+
+{% block title %}Index{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <div class="container">
+    <head>
+      <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+      {% load static %}
+      <title>rating</title>
+    </head>
+    <body>
+      <h4>評価一覧</h4>
+      </hr>
+      <ul class="list-unstyled" style="width:1800">
+        {% for item in object_list %}
+        <li class="media mb-3 p-2 border">
+          <img class="mr-5" src="{% static "image\rating.png" %}" height="64" width="64" alt="メディアの画像">
+          <div class="media-body">
+            <div class="row">
+              <div class="col-md-9">
+                <h5 class="mt-0"><a href="{% url 'recommend:anime_detail' item.anime_id.anime_id %}">{{item.anime_id.name}}</a></h5>
+                <p class="text-nowrap">評価：{{item.evaluation}}</p>
+              </div>
+              <div class="col-md-3">
+                <table class="table">
+                  <tr>
+                    <th><a href="{% url 'recommend:rating_update' item.id %}" class="btn btn-outline-secondary btn-sm text-nowrap">更新</a></th>
+                    <form action="{% url 'recommend:rating_delete' item.id %}" method="POST">
+                      {% csrf_token %}
+                      <td><input type='submit' value='削除' class="btn btn-outline-danger btn-sm text-nowrap" onclick='return confirm("本当に削除しますか？");'></td>
+                    </form>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+
+      {% include "recommend/snippets/pagination.html" %}
+    </body>
+  </div>
+</html>
+{% endblock %}

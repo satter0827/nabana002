@@ -1,0 +1,86 @@
+{% extends "recommend/base.html" %}
+
+{% block title %}anime_detail{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <div class="container">
+    <head>
+      <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+      {% load static %}
+      <title>anime</title>
+    </head>
+    <body>
+      <div class="row p-3">
+        <div class="col-md-3">
+          <th><img src={{ image }} class="img-fluid"height="200%" width="200%"/></th>
+        </div>
+        <div class="col-md-7 order-md-2">
+          <h4>アニメ詳細</h4>
+          <table class="table">
+            <tr>
+              <th>ID</th>
+              <th>{{ anime.anime_id }}</th>
+            </tr>
+            <tr>
+              <th>タイトル</th>
+              <th>{{ anime.name }}</th>
+            </tr>
+            <tr>
+              <th>ジャンル</th>
+              <th>{{ anime.genre }}</th>
+            </tr>
+            <tr>
+              <th>メディア</th>
+              <th>{{ anime.anime_type }}</th>
+            </tr>
+            <tr>
+              <th>話数</th>
+              <th>{{ anime.episodes }}</th>
+            </tr>
+            <tr>
+              <th>平均評価</th>
+              <th>{{ anime.anime_rating }}</th>
+            </tr>
+            <tr>
+              <th>評価数</th>
+              <th>{{ anime.members }}</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row p-3">
+        <div class="col-md-3">
+          <label for="id_evaluation">Evaluation：</label>
+          <output id="output1">5</output>
+        </div>
+        {% if db_status %}
+        <div class="col-md-6">
+          <form action="{% url 'recommend:rating_create' anime.anime_id%}" method="POST" id="rating_create">
+            {% csrf_token %}
+            <input type="range" class="input-range mb-4" name="evaluation" required="" id="id_evaluation" value="5" min="0" max="10" step="1" oninput="document.getElementById('output1').value=this.value">
+          </form>
+        </div>
+        <div class="col-md-2">
+          <input form="rating_create" class="btn btn-outline-info btn-block text-nowrap" type="submit" value="評価" onclick='return confirm("登録しますか？");'>
+        </div>
+        {% else %}
+        <div class="col-md-6">
+          <form action="{% url 'recommend:rating_update' id_status %}" method="POST" id="rating_update">
+            {% csrf_token %}
+            <input type="range" class="input-range mb-4" name="evaluation" required="" id="id_evaluation" value="5" min="0" max="10" step="1" oninput="document.getElementById('output1').value=this.value">
+          </form>
+        </div>
+        <div class="col-md-2">
+          <input form="rating_update" class="btn btn-outline-info btn-block text-nowrap" type="submit" value="更新" onclick='return confirm("登録しますか？");'>
+        </div>
+        {% endif %}
+      </div>
+      <p class="text-center"><a href="#" onClick="history.back(); return false;">戻る</a></p>
+    </body>
+  </div>
+</html>
+
+{% endblock %}
