@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     'allauth.account',   
     'allauth.socialaccount', 
 
-    'bootstrap4',
-
     'recommend',
 ]
 
@@ -78,7 +76,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'builtins':[ 
-                'bootstrap4.templatetags.bootstrap4',
             ],
         },
     },
