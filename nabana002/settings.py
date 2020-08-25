@@ -23,10 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'q4w7f6%%y-vf00u!q-d3*@as@b_*1a9b5l&yfkr8u!jz_9#+sk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False # Falseにする
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #'*'にする
 
+STATIC_ROOT = 'static' #追加する
 
 # Application definition
 
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
     'allauth',                              
     'allauth.account',   
     'allauth.socialaccount', 
+
+    'bootstrap4',
 
     'recommend',
 ]
@@ -76,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'builtins':[ 
+                'bootstrap4.templatetags.bootstrap4',
             ],
         },
     },
@@ -136,8 +140,6 @@ STATIC_URL = '/static/'
 
 #追加
 AUTH_USER_MODEL = 'accounts.CustomUser'
-
-DEBUG = True
 
 ######################################
 # Authentication                     #
