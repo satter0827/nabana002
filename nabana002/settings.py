@@ -184,10 +184,10 @@ MIDDLEWARE = [
 ]
 
 try:
+    from .local_settings import *
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
-    from .local_settings import *
 except ImportError:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static'),
     pass
