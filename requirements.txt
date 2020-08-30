@@ -2,7 +2,6 @@ Django
 gunicorn
 whitenoise
 django-allauth
-django_heroku
 scikit-surprise
 pandas
 django-bootstrap4
