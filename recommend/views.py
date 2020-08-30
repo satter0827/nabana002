@@ -15,14 +15,14 @@ from recommend.forms import AnimeForm, RatingForm
 
 import recommend.utils as utils
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
   template_name = 'recommend/home.html'
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['user_id'] = self.request.user.id
     result_list = Result.objects.filter(user_id=self.request.user.id)
-    
+
     if len(result_list) > 0:
       context['result_one'] = result_list[0]
       context['result_one'].photo = utils.download_img(context['result_one'].anime_id.name)
