@@ -2,3 +2,4 @@ Django
 django-allauth
 scikit-surprise
 pandas
+django-bootstrap4
