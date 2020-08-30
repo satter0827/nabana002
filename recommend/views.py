@@ -21,10 +21,12 @@ class HomeView(TemplateView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['user_id'] = self.request.user.id
-    reult_list = Result.objects.filter(user_id=self.request.user.id)
-    context['result_one'] = reult_list[0]
-    context['result_one'].photo = utils.download_img(context['result_one'].anime_id.name)
-    context['result_list'] = reult_list[1:]
+    result_list = Result.objects.filter(user_id=self.request.user.id)
+    
+    if len(result_list) > 0:
+      context['result_one'] = result_list[0]
+      context['result_one'].photo = utils.download_img(context['result_one'].anime_id.name)
+      context['result_list'] = result_list[1:]
 
     return context
 

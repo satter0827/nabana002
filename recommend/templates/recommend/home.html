@@ -45,6 +45,7 @@
         </section>
       </div>
       <div class="row">
+        {% if result_one %}
         <div class="col-md-3">
           <div class="card">
             <img class="card-img-top" src="{{ result_one.photo }}" alt="Card image cap" height="30%" width="30%">
@@ -64,6 +65,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
         <div class="col-md-9">
           <div class="card-columns">
             {% for item in result_list %}
