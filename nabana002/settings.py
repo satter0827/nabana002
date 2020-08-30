@@ -22,12 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = False # Falseにする
 
 # SECURITY WARNING: keep the secret key used in production secret!
-if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
-    import django_heroku
-    django_heroku.settings(locals())
-else:
-    SECRET_KEY = 'q4w7f6%%y-vf00u!q-d3*@as@b_*1a9b5l&yfkr8u!jz_9#+sk'
+SECRET_KEY = 'q4w7f6%%y-vf00u!q-d3*@as@b_*1a9b5l&yfkr8u!jz_9#+sk'
 
 ALLOWED_HOSTS = ['*'] #'*'にする
 
