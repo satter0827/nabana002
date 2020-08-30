@@ -24,8 +24,6 @@ DEBUG = False # Falseにする
 # SECURITY WARNING: keep the secret key used in production secret!
 if not DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
-    import django_heroku
-    django_heroku.settings(locals())
 
 ALLOWED_HOSTS = ['*'] #'*'にする
 
