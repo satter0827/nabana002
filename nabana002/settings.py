@@ -183,11 +183,13 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware', #追加
 ]
 
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static'),
+
 try:
     from .local_settings import *
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
 except ImportError:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static'),
     pass
