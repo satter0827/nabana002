@@ -1,6 +1,5 @@
 Django
 gunicorn
-mysite
 django-allauth
 scikit-surprise
 pandas
