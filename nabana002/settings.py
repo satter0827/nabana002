@@ -15,19 +15,19 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q4w7f6%%y-vf00u!q-d3*@as@b_*1a9b5l&yfkr8u!jz_9#+sk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # Falseにする
 
-ALLOWED_HOSTS = ['*'] #'*'にする
+# SECURITY WARNING: keep the secret key used in production secret!
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+    import django_heroku #追加
+    django_heroku.settings(locals()) #追加
 
-STATIC_ROOT = 'static' #追加する
+ALLOWED_HOSTS = ['*'] #'*'にする
 
 # Application definition
 
@@ -87,16 +87,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nabana002.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#   }
-#}
 
 import dj_database_url
 
@@ -178,10 +170,6 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'static'),
-#)
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -192,3 +180,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', #追加
 ]
+
+try:
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+    from .local_settings import *
+except ImportError:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static'),
+    pass
