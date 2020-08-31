@@ -6,9 +6,9 @@ import uuid as uuid_lib
 # Create your models here.
 class Anime(models.Model):
     anime_id = models.IntegerField(primary_key=True, editable=False)
-    name = models.CharField(max_length=50, null=True, blank=True)
-    genre = models.CharField(max_length=50, null=True, blank=True)
-    anime_type = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    genre = models.CharField(max_length=200, null=True, blank=True)
+    anime_type = models.CharField(max_length=200, null=True, blank=True)
     episodes = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
     anime_rating = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True, blank=True)
     members = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
@@ -18,7 +18,7 @@ class Anime(models.Model):
 
 class Rating(models.Model):
     #id = models.UUIDField(default=uuid_lib.uuid4, primary_key=True, editable=False)
-    user_id = models.CharField(max_length=50)
+    user_id = models.CharField(max_length=200)
     anime_id = models.ForeignKey(Anime, on_delete=models.SET_NULL, null=True)
     evaluation = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
 
@@ -27,7 +27,7 @@ class Rating(models.Model):
 
 class Result(models.Model):
     #id = models.UUIDField(default=uuid_lib.uuid4, primary_key=True, editable=False)
-    user_id = models.CharField(max_length=50)
+    user_id = models.CharField(max_length=200)
     anime_id = models.ForeignKey(Anime, on_delete=models.SET_NULL, null=True)
     evaluation = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
 
@@ -36,7 +36,7 @@ class Result(models.Model):
 
 class ResultKNN(models.Model):
     rating_id = models.UUIDField(default=uuid_lib.uuid4, primary_key=True, editable=False)
-    user_id = models.CharField(max_length=50)
+    user_id = models.CharField(max_length=200)
     anime_id = models.ForeignKey(Anime, on_delete=models.SET_NULL, null=True)
     evaluation = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
 
