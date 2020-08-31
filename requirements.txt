@@ -10,3 +10,4 @@ django_pandas
 dj_database_url
 psycopg2
 beautifulsoup4
+lxml
