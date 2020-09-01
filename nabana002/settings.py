@@ -193,9 +193,7 @@ MIDDLEWARE = [
 #    os.path.join(BASE_DIR, 'static'),
 #)
 
-STATIC_ROOT = 'static' #追加する
-
 try:
     from .local_settings import *
 except ImportError:
-    pass
+    STATIC_ROOT = 'static' #追加する

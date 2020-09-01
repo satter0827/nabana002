@@ -6,7 +6,7 @@ from recommend.models import Rating, Anime
 
 class Command(BaseCommand):
     help = 'Displays current time'
-    max_count = 1000
+    max_count = 100
 
     def handle(self, *args, **kwargs):
         time = timezone.now().strftime('%X')

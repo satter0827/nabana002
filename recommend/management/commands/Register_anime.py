@@ -31,4 +31,5 @@ class Command(BaseCommand):
             hh.anime_rating = row[5]
             hh.members = row[6]
 
-            hh.save()
+            if hh.members >= 200000:
+                hh.save()

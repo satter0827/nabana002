@@ -86,6 +86,8 @@ class Command(BaseCommand):
       for item in unit:
         result = ResultKNN()
         result.user_id = key
+        if len(key) != 36:
+          continue
         if Anime.objects.filter(anime_id=int(item[0])):
             result.anime_id = Anime.objects.get(anime_id=int(item[0]))
         else:
