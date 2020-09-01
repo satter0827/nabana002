@@ -13,6 +13,11 @@
       <title>result</title>
     </head>
     <body>
+      {% ifequal rec_algo "SVD"%}
+      <a class="m-2 btn btn-outline-info" href="{% url 'recommend:result_updateindex' %}">SVD更新</a>
+      {% else %}
+      <a class="m-2 btn btn-outline-info" href="{% url 'recommend:result_updateindex_KNN' %}">KNN更新</a>
+      {% endifequal %}
       <h4>結果一覧</h4>
       </hr>
       <ul class="list-unstyled" style="width:1800">

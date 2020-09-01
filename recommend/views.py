@@ -151,6 +151,18 @@ class ResultListView(LoginRequiredMixin, ListView):
   def get_queryset(self):
     return Result.objects.filter(user_id=self.request.user.id)
 
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['rec_algo'] = "SVD"
+    return context
+
+class RecViewBySVD(ResultListView):
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['rec_algo'] = "SVD"
+    utils.register_result(context['rec_algo'])
+    return context
+
 class ResultDetailView(LoginRequiredMixin, DetailView):
   model = Result
   template_name = 'recommend/result_detail.html'
@@ -168,6 +180,18 @@ class ResultKNNListView(LoginRequiredMixin, ListView):
 
   def get_queryset(self):
     return ResultKNN.objects.filter(user_id=self.request.user.id)
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['rec_algo'] = "KNN"
+    return context
+
+class RecViewByKNN(ResultKNNListView):
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['rec_algo'] = "KNN"
+    utils.register_result(context['rec_algo'])
+    return context
 
 class ResultKNNDetailView(LoginRequiredMixin, DetailView):
   model = ResultKNN
